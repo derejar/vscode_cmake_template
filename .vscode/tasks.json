@@ -1,0 +1,72 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build application (make)",
+            "command": "Ninja",
+            "type": "shell",
+            "args": [
+                "-C", "${workspaceFolder}\\build",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+            },
+            "dependsOn": "Prepare for work with cmake",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": false,
+                "revealProblems": "onProblem"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
+
+        {
+            "label": "Start tests",
+            "command": "ctest",
+            "type": "shell",
+            "args": ["-V"],
+            "options": {
+                "cwd": "${workspaceFolder}/build",
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": true,
+            },
+        },
+
+        {
+            "label": "Prepare for work with cmake",
+            "command": "cmake",
+            "type": "shell",
+            "args": [
+                "-G",
+                "'Ninja'",
+                "-S ${workspaceFolder}",
+				"-B ${workspaceFolder}/build",
+                "-D", "CMAKE_BUILD_TYPE=${config:buildType}",
+                "-D", "CMAKE_EXPORT_COMPILE_COMMANDS=1"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false,
+                "close": false
+            }
+        }
+    ]
+}

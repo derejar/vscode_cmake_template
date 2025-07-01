@@ -1,0 +1,4 @@
+{
+    "exeName": "vscode_cmake_template", // exe name with no extension
+    "buildType": "Debug"
+}
